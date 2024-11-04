@@ -1,0 +1,21 @@
+name: Artifacts
+on: push
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "flag{" | date | echo "}"  > flag.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: uploaded
+          path: flag.txt
+          retention-days: 31
+  download:
+    runs-on: ubuntu-latest
+    needs: [upload]
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: uploaded
+          path: downloaded
+      - run: cat downloaded/flag.txt
