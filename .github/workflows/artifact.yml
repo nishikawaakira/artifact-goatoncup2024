@@ -4,7 +4,7 @@ jobs:
   upload:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "flag{" | date | echo "}"  > flag.txt
+      - run: echo "flag{$(date '+%Y-%m-%d %H:%M:%S')}" > flag.txt
       - uses: actions/upload-artifact@v4
         with:
           name: uploaded
